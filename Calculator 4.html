@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+ <title>Calculator</title>
+ </head>
+ <body>
+ <table>
+ <tr>
+ <td>Calculator: </td>
+ <td> <input type="text" name="n1" value="" id="n1"> </td>
+ </tr>
+ <tr>
+ <!-- <td><input type="text" name="res" value="" disabled id="res"></td> -->
+ </tr>
+ <tr>
+ <td></td>
+ <td style="text-align:center"> <button type="button" name="button"
+onclick="calculate ()"> Evaluate </button> </td>
+ </tr>
+ </table>
+ <script type="text/javascript">
+//  Function Calculate(objectId)
+// Read first textbox input and assign to n1 
+// Read second textbox input and assign to n2 
+//create res variable
+// if (objectId = "add")
+//     add ('n1') ;and ('n2') and assign to res
+// else if(objectId ="sub")
+//     subtract ('n2') ;from ('n1') and assign to res
+// else if (objectId = "mul") 
+//     multiply ('n2') ;from ('n1') and assign to res
+// else if (objectId = "div") 
+//     divide ('n1') ;by ('n2') and assign to res
+// Display res
+function calculate()  {
+ var n1 = document.getElementById('n1').value;
+ var result = eval(n1)
+ document.getElementById('n1').value = result; 
+ //var n2 = document.getElementById('n2').value;
+//  var res;
+//  if (objectId = "add")
+//  res = parseFloat(n1) + parseFloat(n2); 
+//  else if (objectId = "subtract") 
+//  res = parseFloat(n1) - parseFloat(n2); 
+//  else if (objectId = "multiply") 
+//  res = parseFloat(n1) * parseFloat(n2); 
+//  else if (objectId = "divide") 
+//  res = parseFloat(n1) / parseFloat(n2); 
+   
+
+//call eval function passing n1 into it. 
+//catch the returned results and assign it to n1
+
+}
+
+ </script>
+ </body>
+</html> 

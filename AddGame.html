@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form id="GameForm"> 
+    <table>
+    <text>Add Game</text> 
+    <tr>
+    <td>Name: </td>
+    <td> <input type="text" name="name" value="" id="name"> </td>
+    </tr>
+
+    <tr>
+    <td>Platform: </td>
+    <td> <input type="text" name="platform" value="" id="platform"> </td>
+    </tr>
+    </table>
+    <button type="button" onclick="Post()">Submit</button> 
+    <!--Comment-->
+    </form>
+    <script>
+        function Post() 
+    {
+        //var = variable, New FormData 
+        var formdata = new FormData(document.getElementById('GameForm'));
+
+
+        var jsonObject = {};
+
+        formdata.forEach(function(value, key) {
+            jsonObject[key] = value; 
+        });
+        var jsonString = JSON.stringify(jsonObject, null, 2);
+        SendPostRequest(jsonString);      
+    }
+        function SendPostRequest(data) 
+        {
+            fetch ('https://lime-faithful-hippo.cyclic.app/api/games', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: data
+            })
+            .then(response => response.json())
+            .then(data => {console.log('Success:',data); window.location.replace("HighScore.html");})
+            .catch(error => console.error('Error', error));
+        }
+    </script>
+    
+</body>
+</html>

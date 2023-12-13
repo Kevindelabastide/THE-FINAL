@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form id="GameForm"> 
+    <table>
+    <text>Add Score To HollowKnight</text> 
+
+    <tr>
+    <td>GameID</td>
+    <td> <input type="text" name="gameID" value="" id="gameID"> </td>
+    </tr>
+
+    <tr>
+    <td>Player: </td>
+    <td> <input type="text" name="player" value="" id="player"> </td>
+    </tr>
+
+    <tr>
+    <td>Score: </td>
+    <td> <input type="text" name="score" value="" id="score"> </td>
+    </tr>
+
+    <tr>
+    <td>Time: </td>
+    <td> <input type="text" name="time" value="" id="time"> </td>
+    </tr>
+    </tr>
+    </table>
+    <button type="button" onclick="Post()">Submit</button> 
+    <!--Comment-->
+    </form>
+    <script>
+        function Post() 
+    {
+        //var = variable, New FormData 
+        var formdata = new FormData(document.getElementById('GameForm'));
+
+
+        var jsonObject = {};
+
+        formdata.forEach(function(value, key) {
+            jsonObject[key] = value; 
+        });
+        var jsonString = JSON.stringify(jsonObject, null, 2);
+        SendPostRequest(jsonString);    
+        //Insert Line Here\\    
+    }
+        function SendPostRequest(data) 
+        {
+            fetch ('https://lime-faithful-hippo.cyclic.app/api/leaderboard/35', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: data
+            })
+            .then(response => response.json())
+            .then(data => {console.log('Success:',data); window.location.replace("HollowKnight.html");})
+            .catch(error => console.error('Error', error));
+            
+        }
+    </script>
+    
+</body>
+</html>

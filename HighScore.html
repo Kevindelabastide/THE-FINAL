@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style> 
+table, th, td {
+    border: 1px solid rgb(0, 255, 0);
+    border-collapse: collapse;
+  }
+  th, td {
+    background-color: green;
+    color: magenta;
+  }</style>
+<body>
+    <table id = "ScoreBoard"> 
+      <thead>
+
+      
+    <tr>
+        <text>Game</text>
+        <th>Game Name</th>
+        <th>Platform</th>
+      </tr>
+
+    </thead>
+    <tbody>
+      
+    </tbody>
+    </table>
+    
+    <a href="AddGame.html">
+    <button type="button" onclick="myFunction()">Click Me!</button>
+    </a>
+    
+    <script>
+       
+      document.addEventListener('DOMContentLoaded', function () { 
+        fetch('https://lime-faithful-hippo.cyclic.app/api/games')
+        .then(response => {
+          if (!response.ok) {
+            throw new Error('No Network Reply');
+          }
+          return response.json();
+        })
+        .then(data => {
+
+          populateGameDataTable(data);
+        })
+        .catch(error => {
+          console.error('there was a problem with the fetch operation:',error);
+        });
+      function myFunction() {
+        location.replace("AddGame.html")
+      }
+      function populateGameDataTable(data) {
+        const tableBody = document.querySelector('#ScoreBoard tbody');
+
+        data.forEach(game => {
+          const row = 
+          tableBody.insertRow();
+
+          row.insertCell(0).textContent = game.GameName;
+
+          row.insertCell(1).textContent = game.Platform;
+        });
+      }
+      
+    });
+      </script>
+
+
+</body>
+</html>

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style> 
+table, th, td {
+    border: 1px solid rgb(0, 255, 0);
+    border-collapse: collapse;
+  }
+  th, td {
+    background-color: green; 
+    color: magenta;
+  }
+  </style>
+<body>
+
+    <a href="AddGame.html"> AddGame</a> 
+    <a href="HighScore.html"> HighScore</a> 
+
+    <table id = "ScoreBoard"> 
+      <thead>
+
+      
+    <tr>
+        <br>HollowKnight Leaderboard</br>
+        <th>Player</th>
+        <th>Score</th>
+        <th>Time</th>
+      </tr>
+
+    </thead>
+    <tbody>
+      
+    </tbody>
+    </table>
+    
+    <a href="AddScore.html">
+    <button type="button" onclick="myFunction()">New Entry</button>
+    </a>
+
+    <script>
+       
+      document.addEventListener('DOMContentLoaded', function () { 
+        fetch('https://lime-faithful-hippo.cyclic.app/api/leaderboard/35') 
+        .then(response => {
+          if (!response.ok) {
+            throw new Error('No Network Reply');
+          }
+          return response.json();
+        })
+        .then(data => {
+
+          populateGameDataTable(data.Leaderboard);
+        })
+        .catch(error => {
+          console.error('there was a problem with the fetch operation:',error);
+        });
+      function myFunction() {
+        location.replace("AddScore.html")
+      }
+      function populateGameDataTable(data) {
+        const tableBody = document.querySelector('#ScoreBoard tbody');
+
+        data.forEach(game => {
+          const row = 
+          tableBody.insertRow();
+
+          row.insertCell(0).textContent = game.Player;
+
+          row.insertCell(1).textContent = game.Score;
+
+          row.insertCell(2).textContent = game.Time;
+        });
+      }
+      
+    });
+      </script>
+
+
+</body>
+</html>
